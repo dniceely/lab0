@@ -4,7 +4,7 @@
 
 #include <assert.h>  /* assert() */
 
-#define N 3
+#define N 4
 #define CELL_MAX (N * N - 1)
 
 void print_sep(int length) {
@@ -46,22 +46,26 @@ char get_winner(char board[N][N])
             }
         }
     if (es_winner == true)
-    {
-        winner = board[i][0];
-        return winner;
+        {
+            winner = board[i][0];
+            return winner;
+        }
     }
-    es_winner = true;
-    for (j = 0; j < N-1; j++)
+
+    for (j = 0; j < N; j++)
     {
-        if (board[j][i] != board[j+1][i])
+        es_winner = true;
+        for (i = 0; i < N-1; i++)
+        {
+            if (board[i][j] != board[i+1][j])
         {
             es_winner = false;
             break;
         }
-    }
-    if (es_winner == true)
+        }
+        if (es_winner == true)
     {
-        winner = board[0][i];
+        winner = board[0][j];
         return winner;
     }
 }
@@ -80,7 +84,7 @@ es_winner = true;
             return winner;
         }
         es_winner = true;
-    for ((i = 0, j = N -1); i < N-1; (i++, j--))
+    for (i = 0, j = N -1; i < N-1; (i++, j--))
     {
         if (board[i][j] != board[i+1][j-1])
         {
