@@ -32,65 +32,77 @@ void print_board(char board[N][N])
 char get_winner(char board[N][N])
 {
     char winner = '-';
-    int i;
-    int j;
+    int i = 0;
+    int j = 0;
     bool es_winner = true;
+    
     for (i = 0; i < N; i++)
     {
-        for (j = 0; j < N-1; j++)
+        j = 0;
+        es_winner = true;
+        while (es_winner && j < N-1)
         {
             if (board[i][j] != board[i][j+1])
             {
-            es_winner = false;
-            break;
+                es_winner = false;
             }
+            j = j +1;
         }
-    if (es_winner == true)
+        if (es_winner == true)
         {
             winner = board[i][0];
             return winner;
         }
     }
-
-    for (j = 0; j < N; j++)
+    
+    for (i = 0; i < N; i++)
     {
+        j = 0;
         es_winner = true;
-        for (i = 0; i < N-1; i++)
+        while (es_winner && j < N-1)
         {
-            if (board[i][j] != board[i+1][j])
-        {
-            es_winner = false;
-            break;
-        }
+            if (board[j][i] != board[j+1][i])
+            {
+                es_winner = false;
+            }
+            j = j +1;
         }
         if (es_winner == true)
-    {
-        winner = board[0][j];
-        return winner;
-    }
-}
-es_winner = true;
-    for (i = 0; i < N-1; i++)
-    {
-        if (board[i][i] != board[i+1][i+1])
         {
-            es_winner = false;
-            break;
-        }
-    }
-    if (es_winner == true)
-        {
-            winner = board[0][0];
+            winner = board[0][i];
             return winner;
         }
-        es_winner = true;
-    for (i = 0, j = N -1; i < N-1; (i++, j--))
+    }
+    
+    es_winner = true;
+    i = 0;
+    j = 0;
+    while (es_winner && i < N-1)
+    {
+        if (board[i][j] != board[i+1][j+1])
+        {
+            es_winner = false;
+        }
+        i = i +1;
+        j = j +1;
+    }
+    if (es_winner == true)
+    {
+        winner = board[0][0];
+        return winner;
+    }
+    
+    es_winner = true;
+    i = 0;
+    j = N-1;
+    while (es_winner && i < N-1)
     {
         if (board[i][j] != board[i+1][j-1])
         {
             es_winner = false;
-            break;
         }
+        i = i +1;
+        j = j -1;
     }
     if (es_winner == true)
     {
